@@ -162,30 +162,35 @@ resetMonster();
 main();
 
 
-//背景音乐
-//音乐是否正在播放
-var playing=false;
-setTimeout(function() {
-    document.getElementById("bgMusic").play();
-    playing=true;
+window.onload = function () {
 
-    document.getElementById("pauseMusic").addEventListener('click',pause);
-}, 500);  //0.5秒后将会调用执行remind()函数
+    //背景音乐
+    //音乐是否正在播放
+    var bgMusic = document.getElementById("bgMusic")
+    var pauseMusicBtn = document.getElementById("pauseMusic");
+    var playing = false;
+    setTimeout(function () {
+        bgMusic.play()
+            .then(e => console.log(e))
+            .catch(e => console.log(e));
 
-//音乐暂停
-function pause() {
-    if (playing) {
-          document.getElementById("bgMusic").pause();
-          playing=false;
-          document.getElementById("pauseMusic").textContent="播放音乐";
-    }else{
-        document.getElementById("bgMusic").play();
-        playing=true;
-        document.getElementById("pauseMusic").textContent="暂停音乐";
-    }
-  
+        playing = true;
+
+        pauseMusicBtn.addEventListener('click', pause);
+    }, 500);  //0.5秒后将会调用执行remind()函数
     
-
+    //音乐暂停
+    function pause() {
+        if (playing) {
+            bgMusic.pause();
+            playing = false;
+            pauseMusicBtn.textContent = "播放音乐";
+        } else {
+            bgMusic.play();
+            playing = true;
+            pauseMusicBtn.textContent = "暂停音乐";
+        }
+    }
 
 }
 
